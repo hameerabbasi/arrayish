@@ -1,0 +1,9 @@
+recursive-include arrayish *.py
+include setup.py
+include README.rst
+include LICENSE.txt
+include MANIFEST.in
+include requirements.txt
+
+include versioneer.py
+include arrayish/_version.py

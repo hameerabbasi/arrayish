@@ -1,0 +1,6 @@
+[run]
+source=
+    arrayish/
+
+omit=
+    arrayish/_version.py

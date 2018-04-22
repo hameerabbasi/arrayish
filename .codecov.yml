@@ -1,0 +1,17 @@
+coverage:
+  precision: 2
+  round: down
+  range: 70...98
+
+  ignore:
+    - arrayish/_version.py
+    - ^(?!arrayish\/)
+
+flags:
+  project:
+    enabled: yes
+
+  patch:
+    default:
+      enabled: no
+      target: -1

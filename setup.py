@@ -7,6 +7,14 @@ with open('requirements.txt') as f:
 with open('README.rst') as f:
     long_desc = f.read()
 
+extras_require = {
+    'tests': [
+        'pytest',
+        'pytest-flake8',
+        'pytest-cov'
+    ],
+}
+
 setup(
     name='arrayish',
     description='A package to allow downstream inter-compatibility for Numpy-compatible array structures',
@@ -21,5 +29,6 @@ setup(
     zip_safe=False,
     version=versioneer.get_version(),
     cmdclass=versioneer.get_cmdclass(),
+    extras_require=extras_require,
     license='BSD',
 )

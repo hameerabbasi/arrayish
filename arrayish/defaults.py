@@ -1,30 +1,62 @@
+import functools
+import numbers
+
 import numpy as np
 import multipledispatch as md
 
-dot = md.Dispatcher('dot')
-dot.add((object, object), np.dot)
+np_namespace = {}
 
-tensordot = md.Dispatcher('tensordot')
-tensordot.add((object, object), np.tensordot)
+dispatch = functools.partial(md.dispatch, namespace=np_namespace)
 
-where = md.Dispatcher('where')
-where.add((object,), np.where)
-where.add((object, object, object), np.where)
 
-nanmin = md.Dispatcher('nanmin')
-nanmin.add((object,), np.nanmin)
+@dispatch(object, object)
+def dot(x, y, out=None):
+    return np.dot(x, y, out=out)
 
-nanmax = md.Dispatcher('nanmax')
-nanmax.add((object,), np.nanmax)
 
-nansum = md.Dispatcher('nansum')
-nansum.add((object,), np.nansum)
+@dispatch(object, object)
+def tensordot(a, b, axes=2):
+    return np.tensordot(a, b, axes=axes)
 
-nanprod = md.Dispatcher('nanprod')
-nanprod.add((object,), np.nanprod)
 
-transpose = md.Dispatcher('transpose')
-transpose.add((object,), np.transpose)
+@dispatch(object)
+def where(condition):
+    return np.where(condition)
 
-broadcast_to = md.Dispatcher('broadcast_to')
-broadcast_to.add((object,), np.broadcast_to)
+
+@dispatch(object, object, object)
+def where(condition, x, y):
+    return np.where(condition, x, y)
+
+
+@dispatch(object)
+def nanmin(a, axis=None, out=None, keepdims=np._NoValue):
+    return np.nanmin(a, axis=axis, out=out, keepdims=keepdims)
+
+
+@dispatch(object)
+def nanmax(a, axis=None, out=None, keepdims=np._NoValue):
+    return np.nanmax(a, axis=axis, out=out, keepdims=keepdims)
+
+
+@dispatch(object)
+def nansum(a, axis=None, dtype=None, out=None, keepdims=np._NoValue):
+    return np.nansum(a, axis=axis, dtype=dtype, out=out, keepdims=keepdims)
+
+
+@dispatch(object)
+def nanprod(a, axis=None, dtype=None, out=None, keepdims=np._NoValue):
+    return np.nanprod(a, axis=axis, dtype=dtype, out=out, keepdims=keepdims)
+
+
+@dispatch(object)
+def transpose(a, axes=None):
+    return np.transpose(a, axes=axes)
+
+
+def _broadcast_to(array, shape, subok=False):
+    return np.broadcast_to(array, shape, subok=subok)
+
+
+broadcast_to = dispatch(object, numbers.Integral)(_broadcast_to)
+broadcast_to = dispatch(object, tuple)(_broadcast_to)

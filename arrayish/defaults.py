@@ -54,9 +54,7 @@ def transpose(a, axes=None):
     return np.transpose(a, axes=axes)
 
 
-def _broadcast_to(array, shape, subok=False):
+@dispatch(object, numbers.Integral)
+@dispatch(object, tuple)
+def broadcast_to(array, shape, subok=False):
     return np.broadcast_to(array, shape, subok=subok)
-
-
-broadcast_to = dispatch(object, numbers.Integral)(_broadcast_to)
-broadcast_to = dispatch(object, tuple)(_broadcast_to)

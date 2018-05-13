@@ -1,5 +1,6 @@
 import functools
 import numbers
+import collections
 
 import numpy as np
 import multipledispatch as md
@@ -54,7 +55,6 @@ def transpose(a, axes=None):
     return np.transpose(a, axes=axes)
 
 
-@dispatch(object, numbers.Integral)
-@dispatch(object, tuple)
+@dispatch(object, (numbers.Integral, collections.Iterable))
 def broadcast_to(array, shape, subok=False):
     return np.broadcast_to(array, shape, subok=subok)

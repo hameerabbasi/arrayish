@@ -11,13 +11,13 @@ dispatch = functools.partial(md.dispatch, namespace=np_namespace)
 
 
 @dispatch(object, object)
-def dot(x, y, out=None):
-    return np.dot(x, y, out=out)
+def dot(x, y, **kwargs):
+    return np.dot(x, y, **kwargs)
 
 
 @dispatch(object, object)
-def tensordot(a, b, axes=2):
-    return np.tensordot(a, b, axes=axes)
+def tensordot(a, b, **kwargs):
+    return np.tensordot(a, b, **kwargs)
 
 
 @dispatch(object)
@@ -31,30 +31,30 @@ def where(condition, x, y):
 
 
 @dispatch(object)
-def nanmin(a, axis=None, out=None, keepdims=np._NoValue):
-    return np.nanmin(a, axis=axis, out=out, keepdims=keepdims)
+def nanmin(a, **kwargs):
+    return np.nanmin(a, **kwargs)
 
 
 @dispatch(object)
-def nanmax(a, axis=None, out=None, keepdims=np._NoValue):
-    return np.nanmax(a, axis=axis, out=out, keepdims=keepdims)
+def nanmax(a, **kwargs):
+    return np.nanmax(a, **kwargs)
 
 
 @dispatch(object)
-def nansum(a, axis=None, dtype=None, out=None, keepdims=np._NoValue):
-    return np.nansum(a, axis=axis, dtype=dtype, out=out, keepdims=keepdims)
+def nansum(a, **kwargs):
+    return np.nansum(a, **kwargs)
 
 
 @dispatch(object)
-def nanprod(a, axis=None, dtype=None, out=None, keepdims=np._NoValue):
-    return np.nanprod(a, axis=axis, dtype=dtype, out=out, keepdims=keepdims)
+def nanprod(a, **kwargs):
+    return np.nanprod(a, **kwargs)
 
 
 @dispatch(object)
-def transpose(a, axes=None):
-    return np.transpose(a, axes=axes)
+def transpose(a, **kwargs):
+    return np.transpose(a, **kwargs)
 
 
 @dispatch(object, (numbers.Integral, collections.Iterable))
-def broadcast_to(array, shape, subok=False):
-    return np.broadcast_to(array, shape, subok=subok)
+def broadcast_to(array, shape, **kwargs):
+    return np.broadcast_to(array, shape, **kwargs)

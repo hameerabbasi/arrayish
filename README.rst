@@ -1,7 +1,7 @@
 Arrayish
 ========
 
-This repository is being deprecated in favour of `uarray` and `unumpy`.
+This repository is being deprecated in favour of ``uarray`` and ``unumpy``.
 
 A library for downstream compatibility of Numpy-compatible arrays.
 
